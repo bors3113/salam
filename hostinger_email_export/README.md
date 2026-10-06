@@ -15,18 +15,19 @@ pip install openpyxl
 ## Usage
 
 ```bash
-# prompts for the password
-python export_emails.py --email you@yourdomain.com
+# exports contact@jacheteenalgerie.lu (the default account) and prompts for the password
+python export_emails.py
 
 # or pass the password through an environment variable
-HOSTINGER_EMAIL_PASSWORD='secret' python export_emails.py --email you@yourdomain.com
+HOSTINGER_EMAIL_PASSWORD='secret' python export_emails.py
 
 # only messages since a date, custom output file
-python export_emails.py --email you@yourdomain.com --since 2025-01-01 --output mail.xlsx
+python export_emails.py --since 2025-01-01 --output mail.xlsx
 ```
 
 | Option | Description |
 |---|---|
+| `--email ADDRESS` | Account to export (default `contact@jacheteenalgerie.lu`) |
 | `--since YYYY-MM-DD` | Only export messages on or after this date |
 | `--limit N` | Only the newest N messages per folder |
 | `--sent-folder NAME` | Sent folder name, if auto-detection fails (Hostinger usually uses `INBOX.Sent`) |

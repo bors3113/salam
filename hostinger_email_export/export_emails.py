@@ -16,8 +16,8 @@ Messages are fetched with BODY.PEEK so nothing is marked as read.
 
 Usage:
   pip install openpyxl
-  python export_emails.py --email you@yourdomain.com
-  python export_emails.py --email you@yourdomain.com --since 2025-01-01 --output mail.xlsx
+  python export_emails.py                      # uses contact@jacheteenalgerie.lu
+  python export_emails.py --email other@yourdomain.com --since 2025-01-01 --output mail.xlsx
 
 The password is read from the HOSTINGER_EMAIL_PASSWORD environment variable,
 or prompted for interactively if that is not set.
@@ -42,6 +42,7 @@ try:
 except ImportError:
     sys.exit("openpyxl is required: pip install openpyxl")
 
+DEFAULT_EMAIL = "contact@jacheteenalgerie.lu"
 IMAP_HOST = "imap.hostinger.com"
 IMAP_PORT = 993
 BATCH_SIZE = 100
@@ -365,7 +366,7 @@ def write_summary(wb, account, sections, since):
 
 def main():
     p = argparse.ArgumentParser(description="Export Hostinger sent/received emails to Excel.")
-    p.add_argument("--email", required=True, help="Full Hostinger email address")
+    p.add_argument("--email", default=DEFAULT_EMAIL, help=f"Full Hostinger email address (default {DEFAULT_EMAIL})")
     p.add_argument("--host", default=IMAP_HOST, help=f"IMAP host (default {IMAP_HOST})")
     p.add_argument("--port", type=int, default=IMAP_PORT, help=f"IMAP SSL port (default {IMAP_PORT})")
     p.add_argument("--since", help="Only export messages on/after this date (YYYY-MM-DD)")
